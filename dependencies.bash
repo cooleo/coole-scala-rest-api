@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $HOME/sample-deps
+cd $HOME/coole-scala-rest-api
 
 sbt ++2.11.8 test:compile
 
