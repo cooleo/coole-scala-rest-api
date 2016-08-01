@@ -6,9 +6,9 @@ ENV PATH $PATH:/root/bin
 RUN sbt -sbt-create
 RUN sbt -sbt-version 0.13.11
 
-RUN mkdir -p /tmp/app
-WORKDIR /tmp/app
-COPY app /tmp/app/
+RUN mkdir -p /tmp/coole-play-rest-api
+WORKDIR /tmp/coole-play-rest-api
+COPY app /tmp/coole-play-rest-api/
 RUN sbt update
-RUN rm -r /tmp/app
+RUN rm -r /tmp/coole-play-rest-api
 WORKDIR /

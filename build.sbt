@@ -1,6 +1,6 @@
 import play.sbt.PlayImport._
 
-name := """coole-play-rest-example"""
+name := """coole-play-rest-api"""
 
 version := "1.0-SNAPSHOT"
 
