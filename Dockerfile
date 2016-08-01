@@ -22,4 +22,4 @@ RUN \
 # Define working directory
 WORKDIR /root
 
-CMD['sbt','run']
+CMD sbt run
