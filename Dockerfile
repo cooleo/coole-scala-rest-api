@@ -19,9 +19,6 @@ RUN \
   apt-get install sbt && \
   sbt sbtVersion
 
-RUN sbt build
 
 # Define working directory
 WORKDIR /root
-
-CMD sbt run
