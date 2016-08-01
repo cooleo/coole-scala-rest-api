@@ -1,4 +1,8 @@
 RESTful API written in Scala, using the Play Framework.
+#build with docker
+docker build -t restcoole .
+#run with docker
+docker run -d -v /www/coole-scala-rest-api/:/app:rw -p 9000:9000 restcoole
 
 To start the application:
     ./activator run

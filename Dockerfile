@@ -8,4 +8,9 @@ RUN chmod +x /opt/activator-dist-1.3.6/activator
 RUN mkdir /app
 WORKDIR /app
 
-CMD ["activator", "run"]
+#CMD ["activator", "run"]
+
+ENTRYPOINT ["/opt/activator-dist-1.3.6/activator", "-Dhttp.address=0.0.0.0"]
+
+# Default Command
+CMD ["ui"]
