@@ -1,12 +1,10 @@
 FROM ingensi/oracle-jdk
 MAINTAINER Hung Nguyen <hung.nguyendang@outlook.com>
-
-RUN yum update -y && yum install -y unzip
-RUN curl -O http://downloads.typesafe.com/typesafe-activator/1.3.6/typesafe-activator-1.3.6.zip
-RUN unzip typesafe-activator-1.3.6.zip -d / && rm typesafe-activator-1.3.6.zip && chmod a+x /activator-dist-1.3.6/activator
-ENV PATH $PATH:/activator-dist-1.3.6
-
+RUN yum -y install unzip && yum clean all
+RUN cd /opt && wget https://downloads.typesafe.com/typesafe-activator/1.3.6/typesafe-activator-1.3.6.zip && unzip typesafe-activator-1.3.6.zip && rm typesafe-activator-1.3.6.zip
+ENV PATH=$PATH:/opt/activator-dist-1.3.6/
 EXPOSE 9000 8888
+RUN chmod +x /opt/activator-dist-1.3.6/activator
 RUN mkdir /app
 WORKDIR /app
 
