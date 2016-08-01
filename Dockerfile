@@ -1,17 +1,23 @@
-FROM ingensi/oracle-jdk
-MAINTAINER Hung Nguyen <hung.nguyendang@outlook.com>
-RUN yum -y install unzip && yum clean all
-RUN cd /opt && wget https://downloads.typesafe.com/typesafe-activator/1.3.6/typesafe-activator-1.3.6.zip && unzip typesafe-activator-1.3.6.zip && rm typesafe-activator-1.3.6.zip
-ENV PATH=$PATH:/opt/activator-dist-1.3.6/
-EXPOSE 9000 8888
-RUN chmod +x /opt/activator-dist-1.3.6/activator
-RUN mkdir /app
-WORKDIR /app
+FROM java:8
 
-#CMD ["activator", "run"]
+ENV SCALA_VERSION 2.11.7
+ENV SBT_VERSION 0.13.11
 
-ENTRYPOINT ["/opt/activator-dist-1.3.6/activator", "-Dhttp.address=0.0.0.0"]
+# Install Scala
+## Piping curl directly in tar
+RUN \
+  curl -fsL http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /root/ && \
+  echo >> /root/.bashrc && \
+  echo 'export PATH=~/scala-$SCALA_VERSION/bin:$PATH' >> /root/.bashrc
 
-CMD ["activator", "run"]
-# Default Command
-#CMD ["ui"]
+# Install sbt
+RUN \
+  curl -L -o sbt-$SBT_VERSION.deb http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
+  dpkg -i sbt-$SBT_VERSION.deb && \
+  rm sbt-$SBT_VERSION.deb && \
+  apt-get update && \
+  apt-get install sbt && \
+  sbt sbtVersion
+
+# Define working directory
+WORKDIR /root
